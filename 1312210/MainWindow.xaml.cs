@@ -35,7 +35,7 @@ namespace _1312210
         Socket socket;
         bool isError = false;
         Thread thread;
-        string[] botChat = { "This is auto BOT, nice to play with you ^^!", "What a game!!!!", "Nice!!!!", "Well played!", "Good Game!!!", "You are good!!!", "I like your style ^^!", "am I good?", "Not bad!!!" };
+        string[] botChat = { "This is auto BOT, nice to play with you ^^!", "What a game!!!!", "Nice!!!!", "Well played!", "Good Game!!!", "You are good!!!", "I like your style ^^!", "am I good?", "Not bad!!!", "Have fun!!!"};
         Random rd = new Random();
         public MainWindow()
         {
