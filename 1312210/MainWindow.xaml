@@ -1,0 +1,46 @@
+﻿<Window x:Class="_1312210.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Gomoku" Height="900" Width="1280"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="brushWatermarkBackground" Color="White" />
+        <SolidColorBrush x:Key="brushWatermarkForeground" Color="LightSteelBlue" />
+        <SolidColorBrush x:Key="brushWatermarkBorder" Color="Indigo" />
+
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <!--<local:TextInputToVisibilityConverter x:Key="TextInputToVisibilityConverter" />-->
+
+        <Style x:Key="EntryFieldStyle" TargetType="Grid" >
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,0" />
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Viewbox Stretch="Uniform" HorizontalAlignment="Right">
+            <Canvas x:Name="boardCanvas" Background="Black" Width="600" Height="600" Margin="50,100,600,50" HorizontalAlignment="Right">
+                <Label Content="GOMOKU - FIVE IN A ROW - MULTIPLAYER" Height="69" Width="699" FontSize="36" Background="#FFEEEEEE" Canvas.Left="250" Canvas.Top="-105" />
+                <Grid Grid.Row="0" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" Canvas.Left="775" Margin="0" Canvas.Top="1" >
+                    <TextBlock Margin="5,2" Text="Guest" FontSize ="20" Foreground="{StaticResource brushWatermarkForeground}"
+                       Visibility="{Binding ElementName=tb_name, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <TextBox x:Name="tb_name" Height="31" Width="260" Canvas.Left="768" FontSize="20" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" KeyUp="tb_message_TextChanged" />
+                </Grid>
+
+                <Label Content="Your Name:" Height="40" Width="112" FontSize="20" Background="White" Canvas.Left="651" Canvas.Top="-4" />
+                <Button x:Name="btn_name" Height="31" Width="85" Canvas.Left="1052" Content="Change!" FontSize="20" Background="#FFEEEEEE" Click="btn_name_Click" />
+                <Label Content="Chat" Height="40" Width="486" FontSize="20" Background="#337AB7" Canvas.Left="651" Canvas.Top="50" Foreground="White"/>
+                <RichTextBox x:Name="rtb_conversation" Height="386" Width="486" Canvas.Left="651" Canvas.Top="90" IsReadOnly="True" Block.LineHeight="3" FontSize="20" VerticalScrollBarVisibility="Visible"/>
+
+                <Button x:Name="btn_send" Height="31" Width="85" Canvas.Left="1040" Content="Send" FontSize="20" Background="#F0AD4E" Foreground="White" Click="btn_send_Click" Canvas.Top="490" />
+                <Grid Grid.Row="0" Background="{StaticResource brushWatermarkBackground}" Style="{StaticResource EntryFieldStyle}" Canvas.Left="657" Margin="0" Canvas.Top="490" >
+                    <TextBlock Margin="5,2" Text="Type your message here..." FontSize ="20" Foreground="{StaticResource brushWatermarkForeground}"
+                       Visibility="{Binding ElementName=tb_message, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <TextBox x:Name="tb_message" Height="31" Width="371" Canvas.Left="657" FontSize="20" Canvas.Top="491" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" KeyUp="tb_message_TextChanged" />
+                </Grid>
+            </Canvas>
+        </Viewbox>
+    </Grid>
+</Window>
