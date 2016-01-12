@@ -74,7 +74,7 @@ namespace _1312210
                     break;
                 }
             }
-            if (blocked == 2 || count < 5)
+            if ((blocked == 2 && count < 5) || count < 5)
                 return false;
             else
                 return true;
@@ -115,7 +115,7 @@ namespace _1312210
                     break;
                 }
             }
-            if (blocked == 2 || count < 5)
+            if ((blocked == 2 && count < 5) || count < 5)
                 return false;
             else
                 return true;
@@ -161,7 +161,7 @@ namespace _1312210
                 }
             }
 
-            if (blocked == 2 || count < 5)
+            if ((blocked == 2 && count < 5) || count < 5)
             {
                 count = 1;
                 blocked = 0;
@@ -202,7 +202,7 @@ namespace _1312210
                     }
                 }
 
-                if (blocked == 2 || count < 5)
+                if ((blocked == 2 && count < 5) || count < 5)
                     return false;
                 else
                     return true;
