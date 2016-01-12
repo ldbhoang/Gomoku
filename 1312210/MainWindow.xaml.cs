@@ -16,6 +16,7 @@ using System.Threading;
 using Quobject.SocketIoClientDotNet.Client;
 using System.Reflection;
 using Newtonsoft.Json.Linq;
+using System.Configuration;
 
 namespace _1312210
 {
@@ -34,7 +35,8 @@ namespace _1312210
         Socket socket;
         bool isError = false;
         Thread thread;
-
+        string[] botChat = { "This is auto BOT, nice to play with you ^^!", "What a game!!!!", "Nice!!!!", "Well played!", "Good Game!!!", "You are good!!!", "I like your style ^^!", "am I good?", "Not bad!!!" };
+        Random rd = new Random();
         public MainWindow()
         {
             InitializeComponent();
@@ -213,7 +215,8 @@ namespace _1312210
         #region Recieve Data
         public void ListenData()
         {
-            socket = IO.Socket("ws://gomoku-lajosveres.rhcloud.com:8000");
+            string serverAddress = ConfigurationManager.AppSettings["ServerAddress"];
+            socket = IO.Socket(serverAddress);
             socket.On(Socket.EVENT_CONNECT, () =>
             {
                 Dispatcher.Invoke(() =>
@@ -286,6 +289,7 @@ namespace _1312210
                     //If BOT online and have first turn, lets it plays at [5,5]
                     if (ChosingMode.mode == 4)
                     {
+                        socket.Emit("ChatMessage", botChat[0]);
                         if (str2 != "You are the second player!")
                         {
                             choosedRow = 5;
@@ -369,7 +373,7 @@ namespace _1312210
                             choosedRow = gp.row;
                             gp.board[choosedRow, choosedCol] = 2;
                             socket.Emit("MyStepIs", JObject.FromObject(new { row = choosedRow, col = choosedCol }));
-                            socket.Emit("ChatMessage", "This is auto BOT, nice to play with you ^^!");
+                            socket.Emit("ChatMessage", botChat[rd.Next(1, botChat.Count())] );
                         }
                     
                 }
